@@ -1,0 +1,7 @@
+{
+  "name": "flexi-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

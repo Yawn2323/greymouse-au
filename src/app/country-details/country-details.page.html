@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Where in the world ?
+    </ion-title>
+    <ion-item slot="end" lines="none" style="background-color:none">
+      <ion-icon name="moon-outline"></ion-icon>
+      <ion-toggle  name="blueberry"  (ionChange)="toggleTheme($event)"></ion-toggle>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content content="fullscreen" *ngIf="countryDetails">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img [src]="countryDetails.flags.png" load="lazy"  width="600" height="600"/>
+      </ion-col>
+      <ion-col>
+          <div class="container" ion-padding style="padding-top:60px">
+              <h1><b>{{countryDetails.name.common}}</b></h1>
+              <ion-item lines="none">
+                  <ion-label>
+                    Population:&nbsp;
+                    <ion-text>{{countryDetails.population | currency:'':''}}</ion-text>
+                  </ion-label>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>
+                  Region:&nbsp;
+                  <ion-text>{{countryDetails.region}}</ion-text>
+                </ion-label>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>
+                Sub Region:&nbsp;
+                <ion-text>{{countryDetails.name.common}}</ion-text>
+              </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label>
+              Capital:&nbsp;
+              <ion-text>{{countryDetails.capital}}</ion-text>
+            </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            Top Level Domain:&nbsp;
+            <ion-text>{{countryDetails.tld}}</ion-text>
+          </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          Languages:&nbsp;
+          <ion-text *ngFor="let l of languages">{{l}}</ion-text>
+        </ion-label>
+      </ion-item>
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

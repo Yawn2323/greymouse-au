@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "flexi-app",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

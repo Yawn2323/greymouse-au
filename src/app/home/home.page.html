@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Where in the world ?
+    </ion-title>
+    <ion-item slot="end" lines="none" style="background-color:none">
+      <ion-icon name="moon-outline"></ion-icon>
+      <ion-toggle  name="blueberry"  (ionChange)="toggleTheme($event)"></ion-toggle>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+                <!-- Searchbar with cancel button always shown -->
+              <ion-searchbar showCancelButton="always" animated (ionInput)="filterCountries($event)" style="box-shadow:none"></ion-searchbar>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label>Countries</ion-label>
+              <ion-select (ionChange)="filterRegion($event)">
+                <ion-select-option value="all">All</ion-select-option>
+                <ion-select-option value="Africa">Africa</ion-select-option>
+                <ion-select-option value="America">America</ion-select-option>
+                <ion-select-option value="Asia">Asia</ion-select-option>
+                <ion-select-option value="Europe">Europe</ion-select-option>
+                <ion-select-option value="Ocenia">Ocenia</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="imageLoaded">
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeLg="3" sizeMd="4" sizeXs="6"  *ngFor="let c of countries">
+                 <ion-card class="img-wrapper"  [routerLink]="['/country-details',c.name.common]">
+                    <img [src]="c.flags.png"  width="300" height="300" load="lazy"/>
+                    <ion-card-header>
+                      <h1>{{c.name.common}}</h1>
+                      <ion-card-title>Population:  {{c.population | currency:'2'}}</ion-card-title>
+                      <ion-card-title>Region:  {{c.region}}</ion-card-title>
+                      <ion-card-title>Capital:  {{c.capital}}</ion-card-title>
+                    </ion-card-header>
+                </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+    </div>
+    <div *ngIf="!imageLoaded">
+      <ion-grid>
+        <ion-row>
+          <ion-col sizeLg="4" sizeMd="4" sizeXs="6"  *ngFor="let c of countries">
+               <ion-card class="img-wrapper">
+                  <img src="https://reactnativecode.com/wp-content/uploads/2018/02/Default_Image_Thumbnail.png"/>
+                  <ion-card-header>
+                    <ion-card-subtitle><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></ion-card-subtitle>
+                    <ion-card-title><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></ion-card-title>
+                    <ion-card-title><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></ion-card-title>
+                    <ion-card-title><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></ion-card-title>
+                  </ion-card-header>
+              </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+</ion-content>
